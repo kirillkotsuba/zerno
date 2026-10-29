@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Кофейня «Зерно» — кофе и выпечка</title>
+<meta name="description" content="Кофе собственной обжарки, свежая выпечка и завтраки весь день. Кофе с собой и уютный зал.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf6f0;
+    --card: #ffffff;
+    --text: #2b211b;
+    --muted: #7a6d63;
+    --accent: #b5562b;
+    --soft: #f1e7da;
+    --line: #e6dccf;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: Inter, Arial, sans-serif; line-height: 1.6; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+  h1, h2, h3 { font-family: "Playfair Display", Georgia, serif; line-height: 1.15; }
+
+  /* Шапка */
+  header { position: sticky; top: 0; z-index: 10; background: rgba(250,246,240,.93); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-family: "Playfair Display", serif; font-size: 24px; font-weight: 700; }
+  .logo span { color: var(--accent); }
+  .nav nav a { margin-left: 26px; color: var(--muted); font-size: 15px; }
+  .nav nav a:hover { color: var(--text); }
+  .btn { display: inline-block; background: var(--accent); color: #fff; font-weight: 600; padding: 14px 28px; border-radius: 999px; transition: transform .15s, opacity .2s; }
+  .btn:hover { opacity: .9; transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--text); border: 1.5px solid var(--text); }
+
+  /* Первый экран */
+  .hero { padding: 80px 0 90px; }
+  .hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 50px; align-items: center; }
+  .tag { display: inline-block; background: var(--soft); color: var(--accent); font-weight: 600; font-size: 13px; padding: 6px 14px; border-radius: 999px; margin-bottom: 20px; }
+  .hero h1 { font-size: clamp(40px, 6vw, 66px); }
+  .hero h1 em { color: var(--accent); font-style: italic; }
+  .hero p { color: var(--muted); font-size: 18px; margin: 22px 0 32px; max-width: 480px; }
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* Иллюстрация чашки на CSS */
+  .art { position: relative; aspect-ratio: 1; border-radius: 50%; background: var(--soft); display: flex; align-items: center; justify-content: center; }
+  .cup { position: relative; width: 46%; height: 34%; background: var(--card); border-radius: 0 0 46% 46% / 0 0 60% 60%; box-shadow: 0 20px 40px rgba(43,33,27,.12); }
+  .cup::before { content: ""; position: absolute; top: 0; left: 6%; right: 6%; height: 18%; background: #6b3e26; border-radius: 50%; transform: translateY(-50%); }
+  .cup::after { content: ""; position: absolute; right: -22%; top: 18%; width: 28%; height: 42%; border: 10px solid var(--card); border-left: none; border-radius: 0 50% 50% 0; }
+  .saucer { position: absolute; bottom: 28.5%; width: 66%; height: 7%; background: var(--card); border-radius: 50%; box-shadow: 0 10px 24px rgba(43,33,27,.1); z-index: -0; }
+  .steam { position: absolute; top: 18%; display: flex; gap: 18px; }
+  .steam i { display: block; width: 8px; height: 60px; border-radius: 8px; background: linear-gradient(transparent, rgba(181,86,43,.35)); animation: rise 3s ease-in-out infinite; }
+  .steam i:nth-child(2) { animation-delay: .6s; height: 74px; }
+  .steam i:nth-child(3) { animation-delay: 1.2s; }
+  @keyframes rise { 0%,100% { opacity: .2; transform: translateY(8px) scaleY(.9); } 50% { opacity: 1; transform: translateY(-6px) scaleY(1.05); } }
+  @media (prefers-reduced-motion: reduce) { .steam i { animation: none; opacity: .6; } }
+
+  section { padding: 90px 0; }
+  section h2 { font-size: clamp(32px, 4.5vw, 46px); margin-bottom: 14px; }
+  .lead { color: var(--muted); margin-bottom: 40px; max-width: 560px; }
+
+  /* Преимущества */
+  .perks { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+  .perk { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 26px; }
+  .perk b { display: block; font-family: "Playfair Display", serif; font-size: 36px; color: var(--accent); }
+  .perk p { color: var(--muted); font-size: 15px; }
+
+  /* Меню */
+  .menu-sec { background: var(--soft); }
+  .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 30px; }
+  .tabs button { font: inherit; font-weight: 500; cursor: pointer; border: 1.5px solid var(--text); background: transparent; color: var(--text); padding: 9px 20px; border-radius: 999px; }
+  .tabs button.on { background: var(--text); color: var(--bg); }
+  .menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 0 50px; }
+  .item { display: flex; align-items: baseline; gap: 10px; padding: 16px 0; border-bottom: 1px dashed #d4c5b3; }
+  .item h3 { font-family: Inter, sans-serif; font-size: 17px; font-weight: 600; }
+  .item p { color: var(--muted); font-size: 14px; }
+  .item .dots { flex: 1; }
+  .item .price { font-weight: 600; white-space: nowrap; }
+  .item[hidden] { display: none; }
+
+  /* Отзывы */
+  .reviews { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .review { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 26px; }
+  .review p { font-family: "Playfair Display", serif; font-size: 19px; margin-bottom: 14px; }
+  .review small { color: var(--muted); }
+
+  /* Контакты */
+  .contacts { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+  .box { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 30px; }
+  .box dt { color: var(--muted); font-size: 14px; margin-top: 16px; }
+  .box dt:first-child { margin-top: 0; }
+  .box dd { font-size: 18px; font-weight: 500; }
+  .map { min-height: 280px; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--muted); background: var(--soft); border-radius: 16px; padding: 20px; }
+
+  footer { border-top: 1px solid var(--line); padding: 28px 0; color: var(--muted); font-size: 14px; }
+
+  @media (max-width: 800px) {
+    .hero { padding: 40px 0 60px; }
+    .hero .wrap { grid-template-columns: 1fr; }
+    .art { width: 100%; max-width: 280px; margin: 0 auto; order: -1; }
+    .nav nav { display: none; }
+    section { padding: 64px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo">Зерно<span>.</span></a>
+    <nav>
+      <a href="#menu">Меню</a>
+      <a href="#about">О нас</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <a href="tel:+70000000000" class="btn" style="padding:9px 18px;font-size:14px">Позвонить</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="tag">Открыты каждый день с 8:00</span>
+      <h1>Утро начинается с <em>хорошего кофе</em></h1>
+      <p>Обжариваем зёрна сами, печём круассаны каждое утро и знаем постоянных гостей по имени.</p>
+      <div class="actions">
+        <a href="#menu" class="btn">Посмотреть меню</a>
+        <a href="#contacts" class="btn btn-ghost">Как добраться</a>
+      </div>
+    </div>
+    <div class="art" aria-hidden="true">
+      <div class="steam"><i></i><i></i><i></i></div>
+      <div class="saucer"></div>
+      <div class="cup"></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <h2>Почему к нам возвращаются</h2>
+    <p class="lead">Маленькая кофейня в центре города, где всё делают руками и без спешки.</p>
+    <div class="perks">
+      <div class="perk"><b>2 дня</b><p>от обжарки до вашей чашки, поэтому кофе всегда свежий</p></div>
+      <div class="perk"><b>7:30</b><p>утром достаём из печи первые круассаны и синнабоны</p></div>
+      <div class="perk"><b>−10%</b><p>на кофе, если придёте со своей кружкой</p></div>
+      <div class="perk"><b>Wi-Fi</b><p>и розетки у каждого столика, можно работать</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="menu" class="menu-sec">
+  <div class="wrap">
+    <h2>Меню</h2>
+    <p class="lead">Любой напиток можно сделать на растительном молоке (+50 ₽).</p>
+    <div class="tabs" role="tablist">
+      <button class="on" data-cat="all">Всё</button>
+      <button data-cat="coffee">Кофе</button>
+      <button data-cat="other">Не кофе</button>
+      <button data-cat="food">Еда</button>
+    </div>
+    <div class="menu">
+      <div class="item" data-cat="coffee"><div><h3>Эспрессо</h3><p>Двойной шот</p></div><span class="dots"></span><span class="price">150 ₽</span></div>
+      <div class="item" data-cat="coffee"><div><h3>Капучино</h3><p>250 / 350 мл</p></div><span class="dots"></span><span class="price">220 / 270 ₽</span></div>
+      <div class="item" data-cat="coffee"><div><h3>Флэт уайт</h3><p>Крепкий, с молоком</p></div><span class="dots"></span><span class="price">250 ₽</span></div>
+      <div class="item" data-cat="coffee"><div><h3>Раф ванильный</h3><p>Сливки, ваниль</p></div><span class="dots"></span><span class="price">290 ₽</span></div>
+      <div class="item" data-cat="coffee"><div><h3>Фильтр-кофе</h3><p>Зерно недели</p></div><span class="dots"></span><span class="price">190 ₽</span></div>
+      <div class="item" data-cat="other"><div><h3>Какао с маршмеллоу</h3><p>350 мл</p></div><span class="dots"></span><span class="price">240 ₽</span></div>
+      <div class="item" data-cat="other"><div><h3>Матча латте</h3><p>Японский зелёный чай</p></div><span class="dots"></span><span class="price">280 ₽</span></div>
+      <div class="item" data-cat="other"><div><h3>Чай облепиховый</h3><p>Чайник 500 мл</p></div><span class="dots"></span><span class="price">260 ₽</span></div>
+      <div class="item" data-cat="food"><div><h3>Круассан</h3><p>Классический или с миндалём</p></div><span class="dots"></span><span class="price">160 / 210 ₽</span></div>
+      <div class="item" data-cat="food"><div><h3>Сырники</h3><p>Сметана, ягодный соус</p></div><span class="dots"></span><span class="price">320 ₽</span></div>
+      <div class="item" data-cat="food"><div><h3>Сэндвич с курицей</h3><p>На чиабатте</p></div><span class="dots"></span><span class="price">350 ₽</span></div>
+      <div class="item" data-cat="food"><div><h3>Чизкейк</h3><p>Нью-Йорк</p></div><span class="dots"></span><span class="price">290 ₽</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="wrap">
+    <h2>Что говорят гости</h2>
+    <p class="lead">4,9 на Яндекс Картах и 2ГИС.</p>
+    <div class="reviews">
+      <div class="review"><p>«Лучший флэт уайт в городе. Захожу каждое утро по пути на работу.»</p><small>Анна</small></div>
+      <div class="review"><p>«Сырники как у бабушки. И очень приятные бариста.»</p><small>Дмитрий</small></div>
+      <div class="review"><p>«Тихо, уютно, есть розетки. Моё любимое место для работы.»</p><small>Ольга</small></div>
+    </div>
+  </div>
+</section>
+
+<section id="contacts" class="menu-sec">
+  <div class="wrap">
+    <h2>Приходите в гости</h2>
+    <p class="lead">Или закажите кофе с собой по телефону, приготовим к вашему приходу.</p>
+    <div class="contacts">
+      <dl class="box">
+        <dt>Адрес</dt><dd>ул. Мира, 8</dd>
+        <dt>Телефон</dt><dd><a href="tel:+70000000000">+7 (000) 000-00-00</a></dd>
+        <dt>Будни</dt><dd>8:00 – 22:00</dd>
+        <dt>Выходные</dt><dd>9:00 – 23:00</dd>
+        <dt>Соцсети</dt><dd><a href="#">ВКонтакте</a> · <a href="#">Telegram</a></dd>
+      </dl>
+      <div class="map">Здесь будет карта Яндекса<br>(вставляется кодом из конструктора карт)</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© Кофейня «Зерно». Пример сайта, все данные вымышлены.</div>
+</footer>
+
+<script>
+  // Переключение категорий меню
+  document.querySelectorAll('.tabs button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.tabs button').forEach(function (b) { b.classList.remove('on'); });
+      btn.classList.add('on');
+      var cat = btn.dataset.cat;
+      document.querySelectorAll('.item').forEach(function (item) {
+        item.hidden = cat !== 'all' && item.dataset.cat !== cat;
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
